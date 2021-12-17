@@ -1,0 +1,75 @@
+<div class="container-sm">
+  <form
+    [formGroup]="this.form"
+    class="row g-3 needs-validation"
+    (ngSubmit)="onSubmit()"
+  >
+    <p class="h1 text-center">Job</p>
+    <div class="col-md-6">
+      <input
+        required
+        class="form-control col-sm"
+        type="text"
+        placeholder="Title"
+        formControlName="title"
+      />
+      <span
+        class="text-muted"
+        *ngIf="!form.controls['title'].valid && form.controls['title']?.touched"
+      >
+        Please enter Title
+      </span>
+    </div>
+    <div class="col-md-6">
+      <select class="form-select" formControlName="type" required>
+        <option selected disabled value="">Type</option>
+        <option value="full-time">Full Time</option>
+        <option value="part-time">Part Time</option>
+      </select>
+      <span
+        class="text-muted"
+        *ngIf="!form.controls['type'].valid && form.controls['type']?.touched"
+      >
+        Please enter Type
+      </span>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group mb-2 mr-sm-2">
+        <input
+          class="form-control col-sm"
+          type="text"
+          placeholder="Location"
+          formControlName="location"
+          readonly
+        />
+        <button
+          type="button"
+          class="input-group-prepend btn btn-primary col-md-2"
+          (click)="onLocationClicked()"
+        >
+          Map
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <select class="form-select" formControlName="category" required>
+        <option selected disabled value="">Category</option>
+        <option *ngFor="let category of this.categories" [value]="category.id">
+          {{ category.category }}
+        </option>
+      </select>
+    </div>
+    <div class="mt-2 col-md-12"></div>
+    <div class="row">
+      <div class="col text-center">
+        <button
+          type="submit"
+          class="btn btn-primary col-md-2"
+          [disabled]="!isValid"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
