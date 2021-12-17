@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm input-group">
+      <input
+        type="search"
+        class="form-control rounded"
+        placeholder="Search"
+        aria-label="Search"
+        aria-describedby="search-addon"
+      />
+      <button type="button" class="btn btn-secondary">
+        {{ this.selectedCategoryForSearch }}
+      </button>
+      <button
+        type="button"
+        class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <span class="sr-only"></span>
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+        <a class="dropdown-item" href="#">Separated link</a>
+      </div>
+      <button type="button" class="btn btn-outline-primary">search</button>
+    </div>
+    <div class="col-sm">
+      <button
+        type="button"
+        class="btn btn-primary justify-content-right m-2"
+        (click)="routeToApplication()"
+      >
+        Add Aplication
+      </button>
+    </div>
+  </div>
+</div>
+<div class="mt-2 col-md-12"></div>
+<div class="container">
+  <ag-grid-angular
+    style="width: 100%; height: 535px"
+    id="applicationsGrid"
+    class="ag-theme-alpine"
+    [rowData]="this.rowData"
+    [columnDefs]="this.columnDefs"
+    [frameworkComponents]="this.frameworkComponents"
+    [defaultColDef]="this.defaultColDef"
+    [rowStyle]="{
+      'border-bottom': 'white 10px solid',
+      background: 'light-gray'
+    }"
+    [rowHeight]="120"
+    (sortChanged)="this.sortChanged($event)"
+  >
+  </ag-grid-angular>
+</div>
+<div class="mt-2 col-md-12"></div>
+<div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [hidden]="this.isFirstPage">
+        <a class="page-link" (click)="onChangePageClick(0)" tabindex="-1">{{
+          "\<\<"
+        }}</a>
+      </li>
+      <li class="page-item" [hidden]="this.isFirstPage">
+        <a class="page-link" (click)="onChangePageClick(1)">{{
+          this.pageInfo?.prevPage ?? ""
+        }}</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" (click)="onChangePageClick(2)">{{
+          this.pageInfo?.curPage ?? "1"
+        }}</a>
+      </li>
+      <li class="page-item" [hidden]="this.isLastPage">
+        <a class="page-link" (click)="onChangePageClick(3)">{{
+          this.pageInfo?.nextPage ?? ""
+        }}</a>
+      </li>
+      <li class="page-item" [hidden]="this.isLastPage">
+        <a class="page-link" (click)="onChangePageClick(4)">>></a>
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -1,0 +1,108 @@
+<div class="container-sm">
+  <form
+    [formGroup]="this.form"
+    class="row g-3 needs-validation"
+    (ngSubmit)="onSubmit()"
+  >
+    <p class="h1 text-center">Applicant</p>
+    <div class="col-md-6">
+      <input
+        required
+        class="form-control col-sm"
+        type="text"
+        placeholder="Full Name"
+        formControlName="fullName"
+      />
+      <span
+        class="text-muted"
+        *ngIf="
+          !form.controls['fullName'].valid && form.controls['fullName']?.touched
+        "
+      >
+        Please enter your Name
+      </span>
+    </div>
+    <div class="col-md-6">
+      <input
+        class="form-control col-sm"
+        type="text"
+        placeholder="Mail"
+        formControlName="email"
+      />
+      <span
+        class="text-muted"
+        *ngIf="!form.controls['email'].valid && form.controls['email']?.touched"
+      >
+        Please enter a valid eMail
+      </span>
+    </div>
+    <div class="col-md-6">
+      <input
+        required
+        class="form-control col-sm"
+        type="text"
+        placeholder="Phone"
+        formControlName="phone"
+      />
+      <span
+        class="text-muted"
+        *ngIf="!form.controls['phone'].valid && form.controls['phone']?.touched"
+      >
+        Please enter your Phone No.
+      </span>
+    </div>
+    <div class="col-md-6">
+      <select
+        class="form-select"
+        formControlName="applicantStatus"
+        placeholder="Status"
+        required
+      >
+        <option value="pending_review">Pending</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group mb-2 mr-sm-2">
+        <select
+          class="form-select"
+          formControlName="job"
+          placeholder="Job"
+          required
+        >
+          <option selected disabled value="">Job</option>
+          <option *ngFor="let job of this.jobs" [value]="job.id">
+            {{ job.title }}
+          </option>
+        </select>
+        <button
+          type="button"
+          class="input-group-prepend btn btn-primary col-md-2"
+          (click)="routeToAddJob()"
+        >
+          +
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6 text-center">
+      <input
+        class="form-control file-upload"
+        id="formFileLg"
+        type="file"
+        formControlName="resume"
+        (change)="uploadedFileChanged($event)"
+      />
+    </div>
+    <div class="mt-2 col-md-12"></div>
+    <div class="row">
+      <div class="col text-center">
+        <button
+          type="submit"
+          class="btn btn-primary col-md-2"
+          [disabled]="!isValid"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
